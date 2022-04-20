@@ -1,68 +1,58 @@
 #pragma once
 
-class Figura {
+class Figury{
+	public:
+		virtual double circumference()=0;
+		virtual double area()=0;
+};
+
+class Czworokat : public Figury{
+	public:
+		Czworokat(double _b1,double _b2,double _b3,double _b4,double _kat);
+		double circumference() override;
+		double area() override;
 	protected:
-		virtual void circumference() {};
-		virtual void area() {};
-
-		double circValue = 1.0;
-		double areaValue = 1.0;
-	public:
-		inline double returnCircumference()const { return circValue; };
-		inline double returnArea()const { return areaValue; };
+		double b1,b2,b3,b4,kat;
 };
 
-class Kolo : public Figura {
+class Kwadrat : public Czworokat{
 	public:
-		Kolo(double _radius);
-	private:
-		void circumference()override;
-		void area()override;
-		double radius = 1.0;
+		Kwadrat(double b);
 };
 
-class Czworokat : public Figura {
+class Prostokat : public Czworokat{
 	public:
-		Czworokat(double _b1=1.0, double _b2=1.0, double _b3=1.0, double _b4=1.0, double _angle=180.0);
-	private:
-		void circumference()override;
-		void area()override;
-		double b1 = 1.0;
-		double b2 = 1.0;
-		double b3 = 1.0;
-		double b4 = 1.0;
-		double angle = 90.0;
+		Prostokat(double a,double b);
 };
 
-class Kwadrat : public Czworokat {
+class Romb : public Czworokat{
 	public:
-		Kwadrat(double _b);
+		Romb(double b,double kat);
 };
 
-class Prostokat : public Czworokat {
+class Pieciokat : public Figury{
 	public:
-		Prostokat(double _b1=1.0, double _b2=1.0);
+		Pieciokat(double _b);
+		double circumference() override;
+		double area() override;
+	protected:
+		double b;
 };
 
-class Romb : public Czworokat {
+class Szesciokat : public Figury{
 	public:
-		Romb(double _b=1.0, double _angle = 180.0);
+		Szesciokat(double _b);
+		double circumference() override;
+		double area() override;
+	protected:
+		double  b;
 };
 
-class Pieciokat : public Figura {
+class Kolo : public Figury{
 	public:
-		Pieciokat(double _b = 1.0);
-	private:
-		void circumference()override;
-		void area()override;
-		double b = 1.0;
-};
-
-class Szesciokat : public Figura {
-	public:
-		Szesciokat(double _b = 1.0);
-	private:
-		void circumference()override;
-		void area()override;
-		double b = 1.0;
+		Kolo(double _r);
+		double circumference() override;
+		double area() override;
+	protected:
+		double r;
 };

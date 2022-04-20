@@ -6,55 +6,53 @@
 #define PENTAGON_CONST 1.72047740059;
 #define HEXAGON_CONST 2.59807621135;
 
+	Czworokat::Czworokat(double _b1,double _b2,double _b3,double _b4,double _kat){
+		b1 = _b1;
+        b2 = _b2;
+        b3 = _b3;
+        b4 = _b4;
+        kat = 2.0*_kat;
+	};
+	double Czworokat::circumference(){
+		return b1+b2+b3+b4;
+	};
+	double Czworokat::area(){
+		const double s = circumference()/2.0;
+		return sqrt((s-b1)*(s-b2)*(s-b3)*(s-b4)-(b1*b2*b3*b4*pow(cos(RAD(kat)/2.0),2.0)));
+	};
 
-Kolo::Kolo(double _radius) :Figura(),radius{_radius} {
-	circumference();
-	area();
-};
-void Kolo::circumference() {
-	circValue = 2.0 * PI * radius;
-};
-void Kolo::area() {
-	areaValue = PI * pow(radius, 2.0);
-};
+	Kwadrat::Kwadrat(double b):Czworokat(b,b,b,b,90.0){};
+	Prostokat::Prostokat(double a,double b):Czworokat(a,a,b,b,90.0){};
+	Romb::Romb(double b,double kat):Czworokat(b,b,b,b,kat){};
 
-Czworokat::Czworokat(double _b1, double _b2, double _b3, double _b4, double _angle) :b1{ _b1 }, b2{ _b2 }, b3{ _b3 }, b4{ _b4 }, angle{_angle} {
-	circumference();
-	area(); 
-};
-void Czworokat::circumference(){
-	circValue = b1 + b2 + b3 + b4;
-};
-void Czworokat::area() {
-	double s = circValue / 2.0;
-	areaValue = sqrt((s-b1)*(s-b2)*(s-b3)*(s-b4)-((b1*b2*b3*b4)*pow(cos(RAD(angle/2)),2.0)));
-};
+	Pieciokat::Pieciokat(double _b){
+		b = _b;
+	};
+	double Pieciokat::circumference(){
+		return 5.0*b;
+	};
+	double Pieciokat::area(){
+		return pow(b,2.0)*PENTAGON_CONST;
+	};
 
-Kwadrat::Kwadrat(double _b) : Czworokat(_b, _b, _b, _b, 180.0) {};
-Prostokat::Prostokat(double _b1, double _b2) : Czworokat(_b1, _b1, _b2, _b2, 180.0) {};
-Romb::Romb(double _b, double _angle) : Czworokat(_b, _b, _b, _b, _angle) {};
-
-Pieciokat::Pieciokat(double _b) : b{ _b } {
-	circumference();
-	area();
-};
-void Pieciokat::circumference() {
-	circValue = 5.0 * b;
-};
-void Pieciokat::area() {
-	areaValue = pow(b, 2.0) * PENTAGON_CONST;
-};
-
-Szesciokat::Szesciokat(double _b) :b{ _b } {
-	circumference();
-	area();
-};
-void Szesciokat::circumference() {
-	circValue = 6.0 * b;
-};
-void Szesciokat::area() {
-	areaValue = pow(b, 2.0) * HEXAGON_CONST;
-};
+	Szesciokat::Szesciokat(double _b){
+		b=_b;
+	};
+	double Szesciokat::circumference(){
+		return 6.0*b;
+	};
+	double Szesciokat::area(){
+		return pow(b,2.0)*HEXAGON_CONST;
+	};
+	Kolo::Kolo(double _r){
+		r=_r;
+	};
+	double Kolo::circumference(){
+		return 2.0*PI*r;
+	};
+	double Kolo::area(){
+		return pow(r,2.0)*PI;
+	};
 
 #undef PI
 #undef RAD
